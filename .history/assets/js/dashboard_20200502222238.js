@@ -7,17 +7,13 @@ shim: {
 'vector-map-de': ['vector-map', 'jquery'],
 'vector-map-world': ['vector-map', 'jquery'],
 'core': ['bootstrap', 'jquery'],
-'typeahead.js':  {
-    deps: [ 'jquery' ],
-    init: function ($) {
-        return require.s.contexts._.registry['typeahead.js'].factory( $ );
-    },
-'bloodhound': {
-       deps: ['jquery'],
-       exports: 'Bloodhound'
-    }
+'typeahead': {
+    deps: ['jquery']
+},
+'bloodhound' :{
+    deps: ['jquery'],
+    exports: 'Bloodhound'
 }
-
 },
 paths: {
 'core': 'assets/js/core',
@@ -30,9 +26,8 @@ paths: {
 'vector-map-de': 'assets/js/vendors/jquery-jvectormap-de-merc',
 'vector-map-world': 'assets/js/vendors/jquery-jvectormap-world-mill',
 'circle-progress': 'assets/js/vendors/circle-progress.min',
-'typeahead':'assets/js/vendors/typeahead.jquery',
-'bloodhound':'assets/js/vendors/bloodhound',
-
+'typeahead' : 'assets/js/vendors/typeahead.jquery',
+'bloodhound' :  'assets/js/vendors/bloodhound.min',
 }
 });
 window.tabler = {

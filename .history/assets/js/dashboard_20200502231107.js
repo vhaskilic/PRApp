@@ -7,7 +7,7 @@ shim: {
 'vector-map-de': ['vector-map', 'jquery'],
 'vector-map-world': ['vector-map', 'jquery'],
 'core': ['bootstrap', 'jquery'],
-'typeahead.js':  {
+'typeahead':  {
     deps: [ 'jquery' ],
     init: function ($) {
         return require.s.contexts._.registry['typeahead.js'].factory( $ );
