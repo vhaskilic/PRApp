@@ -34,18 +34,33 @@
     <!-- Dashboard Core -->
     <link href="./assets/css/dashboard.css" rel="stylesheet" />
     
-    <script src="./assets/js/vendors/jquery-ui.js"></script>
-    <link href="./assets/css/jquery-ui.css" rel="stylesheet" />
-    <link href="./assets/css/jquery-ui.structure.css.css" rel="stylesheet" />
-    <link href="./assets/css/jquery-ui.theme.css.css" rel="stylesheet" />
     
-
     <script src="./assets/js/vendors/handlebars.js"></script>
     <link href="./assets/css/typehead.css" rel="stylesheet" />
     <script src="./assets/js/typehead.js"></script>
     <script>
     var clients =[
-       ];
+        {
+            "Name": "Otto Clay",
+            "Age": 61,
+            "Country": 6,
+            "Address": "Ap #897-1459 Quam Avenue",
+            "Married": false
+        },
+        {
+            "Name": "Connor Johnston",
+            "Age": 73,
+            "Country": 7,
+            "Address": "Ap #370-4647 Dis Av.",
+            "Married": false
+        },
+        {
+            "Name": "Lacey Hess",
+            "Age": 29,
+            "Country": 7,
+            "Address": "Ap #365-8835 Integer St.",
+            "Married": false
+        }];
     
     </script>
 
@@ -223,7 +238,7 @@
                             
                                    
                             
-                                    deleteConfirm: "Silmek istediğinize emin misiniz?",
+                                    deleteConfirm: "Do you really want to delete the client?",
                             
                                     data: clients,
                             
@@ -231,7 +246,7 @@
                                         { name: "Proje", type: "text", width: 50 },
                                         { name: "Malzeme No", type: "text", width: 150 },
                                         { name: "Miktar", type: "number", width: 50 },
-                                        { name: "IhtTarihi", type: "date", width: 150  },
+                                        { name: "İht. Tarihi", type: "date", width: 150  },
                                         { type: "control" }
                                     ]
                                 });
@@ -241,7 +256,7 @@
                   
                 </div>
                 <div class="card-footer text-right">
-                  <button class="btn btn-primary"><i class="fa fa-send">&nbsp;Gönder</i></button>
+                  <button class="btn btn-primary" onclick='$("#jsGrid").jsGrid("insertItem", { Name: "John", Age: 25, Country: 2 })'><i class="fa fa-send">&nbsp;Gönder</i></button>
                 </div>
                 </div>
               </div>

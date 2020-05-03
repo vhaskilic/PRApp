@@ -34,11 +34,8 @@
     <!-- Dashboard Core -->
     <link href="./assets/css/dashboard.css" rel="stylesheet" />
     
-    <script src="./assets/js/vendors/jquery-ui.js"></script>
-    <link href="./assets/css/jquery-ui.css" rel="stylesheet" />
-    <link href="./assets/css/jquery-ui.structure.css.css" rel="stylesheet" />
-    <link href="./assets/css/jquery-ui.theme.css.css" rel="stylesheet" />
-    
+    <script src="./assets/js/vendors/jquery.datetimepicker.full.js"></script>
+    <link href="./assets/css/jquery.datetimepicker.min.css" rel="stylesheet" />
 
     <script src="./assets/js/vendors/handlebars.js"></script>
     <link href="./assets/css/typehead.css" rel="stylesheet" />
@@ -223,7 +220,7 @@
                             
                                    
                             
-                                    deleteConfirm: "Silmek istediğinize emin misiniz?",
+                                    deleteConfirm: "Do you really want to delete the client?",
                             
                                     data: clients,
                             
@@ -231,7 +228,7 @@
                                         { name: "Proje", type: "text", width: 50 },
                                         { name: "Malzeme No", type: "text", width: 150 },
                                         { name: "Miktar", type: "number", width: 50 },
-                                        { name: "IhtTarihi", type: "date", width: 150  },
+                                        { name: "İht. Tarihi", type: "date", width: 150  },
                                         { type: "control" }
                                     ]
                                 });

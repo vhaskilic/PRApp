@@ -34,18 +34,33 @@
     <!-- Dashboard Core -->
     <link href="./assets/css/dashboard.css" rel="stylesheet" />
     
-    <script src="./assets/js/vendors/jquery-ui.js"></script>
-    <link href="./assets/css/jquery-ui.css" rel="stylesheet" />
-    <link href="./assets/css/jquery-ui.structure.css.css" rel="stylesheet" />
-    <link href="./assets/css/jquery-ui.theme.css.css" rel="stylesheet" />
     
-
     <script src="./assets/js/vendors/handlebars.js"></script>
     <link href="./assets/css/typehead.css" rel="stylesheet" />
     <script src="./assets/js/typehead.js"></script>
     <script>
     var clients =[
-       ];
+        {
+            "Name": "Otto Clay",
+            "Age": 61,
+            "Country": 6,
+            "Address": "Ap #897-1459 Quam Avenue",
+            "Married": false
+        },
+        {
+            "Name": "Connor Johnston",
+            "Age": 73,
+            "Country": 7,
+            "Address": "Ap #370-4647 Dis Av.",
+            "Married": false
+        },
+        {
+            "Name": "Lacey Hess",
+            "Age": 29,
+            "Country": 7,
+            "Address": "Ap #365-8835 Integer St.",
+            "Married": false
+        }];
     
     </script>
 
@@ -173,28 +188,26 @@
                   </FORM>
                   <SCRIPT id="result-template" type="text/x-handlebars-template">
                         <div class="ProfileCard u-cf">
-                          
+                          <img class="ProfileCard-avatar" src="{{profile_image_url_https}}">
+                  
                           <div class="ProfileCard-details">
-                            <div class="ProfileCard-realName">{{no}}</div>
-                            <div class="ProfileCard-screenName">-{{proje}}</div>
-                            <div class="ProfileCard-description">{{name}}</div>
+                            <div class="ProfileCard-realName">{{name}}</div>
+                            <div class="ProfileCard-screenName">@{{screen_name}}</div>
+                            <div class="ProfileCard-description">{{description}}</div>
                           </div>
                   
                           <div class="ProfileCard-stats">
-                            <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">-</span> {{tip}}</div>
-                            <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">-</span> {{sinif}}</div>
-                           
+                            <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Tweets:</span> {{statuses_count}}</div>
+                            <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Following:</span> {{friends_count}}</div>
+                            <div class="ProfileCard-stat"><span class="ProfileCard-stat-label">Followers:</span> {{followers_count}}</div>
                           </div>
                         </div>
                   </SCRIPT>
                       
                   <SCRIPT id="empty-template" type="text/x-handlebars-template">
-                    <div class="EmptyMessage">
-                      {{query}} sistemde bulunamamıştır! 
-                      <button class="btn btn-primary"><i class="fe fe-plus">&nbsp;Yeni Malzeme Talebi</i></button>
-                    </div>
+                        <div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div>
                   </SCRIPT>  
-                 
+                 <button align="right" class="btn btn-primary" onclick='$("#jsGrid").jsGrid("insertItem", { Name: "John", Age: 25, Country: 2 })'><i class="fe fe-plus">Ekle</i></button>
                 </div>
                 </div>
               </div>
@@ -204,7 +217,6 @@
                   <div class="card-header">
                     <h3 class="card-title">Talep Kalemleri</h3>
                   </div>
-                  <div class="card-body">
                   <div id="jsGrid"></div>
                   <script>
                    
@@ -212,7 +224,7 @@
                           
 
                           $("#jsGrid").jsGrid({
-                                    height: "400px",
+                                    height: "500px",
                                     width: "100%",
                             
                                    
@@ -223,26 +235,22 @@
                             
                                    
                             
-                                    deleteConfirm: "Silmek istediğinize emin misiniz?",
+                                    deleteConfirm: "Do you really want to delete the client?",
                             
                                     data: clients,
                             
                                     fields: [
-                                        { name: "Proje", type: "text", width: 50 },
-                                        { name: "Malzeme No", type: "text", width: 150 },
-                                        { name: "Miktar", type: "number", width: 50 },
-                                        { name: "IhtTarihi", type: "date", width: 150  },
+                                        { name: "Name", type: "text", width: 150 },
+                                        { name: "Age", type: "number", width: 50 },
+                                        { name: "Address", type: "text", width: 200 },
+                                        { name: "Country", type: "text", width: 150  },
+                                        { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
                                         { type: "control" }
                                     ]
                                 });
                         });
                       
                   </script>
-                  
-                </div>
-                <div class="card-footer text-right">
-                  <button class="btn btn-primary"><i class="fa fa-send">&nbsp;Gönder</i></button>
-                </div>
                 </div>
               </div>
             </div>

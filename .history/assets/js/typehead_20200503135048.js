@@ -186,7 +186,7 @@ $(document).ready(function() {
       "Proje":"TAI",
       "Malzeme No":suggestion.no,
       "Miktar":1,
-      "IhtTarihi":new Date()
+      "İht. Tarihi":(new Date()).toISOString(),
     })
     console.log('Selection: ' + suggestion.name);
   });

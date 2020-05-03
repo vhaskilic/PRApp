@@ -1,37 +1,32 @@
 
-var MyDateField = function(config) {
+var MyDateField = function (config) {
   jsGrid.Field.call(this, config);
 };
 
 MyDateField.prototype = new jsGrid.Field({
-
-  css: "date-field",            // redefine general property 'css'
-  align: "center",              // redefine general property 'align'
-
-  myCustomProperty: "foo",      // custom property
-
-  sorter: function(date1, date2) {
+  
+  sorter: function (date1, date2) {
       return new Date(date1) - new Date(date2);
   },
-
-  itemTemplate: function(value) {
+  
+  itemTemplate: function (value) {
       return new Date(value).toDateString();
   },
-
-  insertTemplate: function(value) {
-      return this._insertPicker = $("<input>").datepicker({ defaultDate: new Date() });
+  
+  insertTemplate: function (value) {
+      return this._insertPicker = $("<input class='date-picker'>").datetimepicker();
   },
-
-  editTemplate: function(value) {
-      return this._editPicker = $("<input>").datepicker().datepicker("setDate", new Date(value));
+  
+  editTemplate: function (value) {
+      return this._editPicker = $("<input class='date-picker'>").datetimepicker();
   },
-
-  insertValue: function() {
-      return this._insertPicker.datepicker("getDate").toISOString();
+  
+  insertValue: function () {
+      return this._insertPicker.data("DateTimePicker").useCurrent();
   },
-
-  editValue: function() {
-      return this._editPicker.datepicker("getDate").toISOString();
+  
+  editValue: function () {
+      return this._editPicker.data("DateTimePicker").useCurrent();
   }
 });
 
@@ -186,7 +181,7 @@ $(document).ready(function() {
       "Proje":"TAI",
       "Malzeme No":suggestion.no,
       "Miktar":1,
-      "IhtTarihi":new Date()
+      "İht. Tarihi":"01.01.2021",
     })
     console.log('Selection: ' + suggestion.name);
   });

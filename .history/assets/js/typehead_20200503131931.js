@@ -182,12 +182,6 @@ $(document).ready(function() {
     $('.Typeahead-spinner').hide();
   })
   .on('typeahead:select', function(ev, suggestion) {
-    $("#jsGrid").jsGrid("insertItem",  {
-      "Proje":"TAI",
-      "Malzeme No":suggestion.no,
-      "Miktar":1,
-      "IhtTarihi":new Date()
-    })
     console.log('Selection: ' + suggestion.name);
   });
 

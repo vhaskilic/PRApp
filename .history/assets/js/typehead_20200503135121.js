@@ -185,8 +185,7 @@ $(document).ready(function() {
     $("#jsGrid").jsGrid("insertItem",  {
       "Proje":"TAI",
       "Malzeme No":suggestion.no,
-      "Miktar":1,
-      "IhtTarihi":new Date()
+      "Miktar":1
     })
     console.log('Selection: ' + suggestion.name);
   });

@@ -1,43 +1,4 @@
 
-var MyDateField = function(config) {
-  jsGrid.Field.call(this, config);
-};
-
-MyDateField.prototype = new jsGrid.Field({
-
-  css: "date-field",            // redefine general property 'css'
-  align: "center",              // redefine general property 'align'
-
-  myCustomProperty: "foo",      // custom property
-
-  sorter: function(date1, date2) {
-      return new Date(date1) - new Date(date2);
-  },
-
-  itemTemplate: function(value) {
-      return new Date(value).toDateString();
-  },
-
-  insertTemplate: function(value) {
-      return this._insertPicker = $("<input>").datepicker({ defaultDate: new Date() });
-  },
-
-  editTemplate: function(value) {
-      return this._editPicker = $("<input>").datepicker().datepicker("setDate", new Date(value));
-  },
-
-  insertValue: function() {
-      return this._insertPicker.datepicker("getDate").toISOString();
-  },
-
-  editValue: function() {
-      return this._editPicker.datepicker("getDate").toISOString();
-  }
-});
-
-jsGrid.fields.date = MyDateField;
-
-
 var pf=[
   {
     "id":1,
@@ -141,7 +102,7 @@ $(document).ready(function() {
   });
 
   // ensure default users are read on initialization
-  engine.get('1','3', '4','5','6','7','8','9')
+  engine.get('1', '2', '3', '4','5','6','7','8','9')
 
   function engineWithDefaults(q, sync, async) {
     if (q === '') {
@@ -158,7 +119,7 @@ $(document).ready(function() {
     hint: $('.Typeahead-hint'),
     menu: $('.Typeahead-menu'),
     minLength: 0,
-    maxItem: false,
+    maxItem:10,
     classNames: {
       open: 'is-open',
       empty: 'is-empty',
@@ -169,7 +130,6 @@ $(document).ready(function() {
   }, {
     source: engineWithDefaults,
     displayKey: 'no',
-    limit:10,
     templates: {
       suggestion: template,
       empty: empty
@@ -182,12 +142,6 @@ $(document).ready(function() {
     $('.Typeahead-spinner').hide();
   })
   .on('typeahead:select', function(ev, suggestion) {
-    $("#jsGrid").jsGrid("insertItem",  {
-      "Proje":"TAI",
-      "Malzeme No":suggestion.no,
-      "Miktar":1,
-      "IhtTarihi":new Date()
-    })
     console.log('Selection: ' + suggestion.name);
   });
 

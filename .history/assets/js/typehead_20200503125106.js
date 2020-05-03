@@ -1,47 +1,6 @@
 
-var MyDateField = function(config) {
-  jsGrid.Field.call(this, config);
-};
-
-MyDateField.prototype = new jsGrid.Field({
-
-  css: "date-field",            // redefine general property 'css'
-  align: "center",              // redefine general property 'align'
-
-  myCustomProperty: "foo",      // custom property
-
-  sorter: function(date1, date2) {
-      return new Date(date1) - new Date(date2);
-  },
-
-  itemTemplate: function(value) {
-      return new Date(value).toDateString();
-  },
-
-  insertTemplate: function(value) {
-      return this._insertPicker = $("<input>").datepicker({ defaultDate: new Date() });
-  },
-
-  editTemplate: function(value) {
-      return this._editPicker = $("<input>").datepicker().datepicker("setDate", new Date(value));
-  },
-
-  insertValue: function() {
-      return this._insertPicker.datepicker("getDate").toISOString();
-  },
-
-  editValue: function() {
-      return this._editPicker.datepicker("getDate").toISOString();
-  }
-});
-
-jsGrid.fields.date = MyDateField;
-
-
 var pf=[
   {
-    "id":1,
-    "id_str":"1",
     "proje":"TAI",
     "no":"93100070001",
     "name":"DANIŞMANLIK HİZMETİ",
@@ -50,8 +9,6 @@ var pf=[
 
   },
   {
-    "id":2,
-    "id_str":"2",
     "proje":"TAI",
     "no":"93100070002",
     "name":"ÇALIŞMANLIK HİZMETİ",
@@ -59,8 +16,6 @@ var pf=[
     "sinif":"DANIŞMANLIK ÇALIŞMANLIK"
   },
   {
-    "id":3,
-    "id_str":"3",
     "proje":"COM",
     "no":"76100010030",
     "name":"BOYA SOKUCU, TURCO 6776 LO",
@@ -68,8 +23,6 @@ var pf=[
     "sinif":"ASİTLER VE BAZLAR"
   },
   {
-    "id":4,
-    "id_str":"4",
     "proje":"COM",
     "no":"82100031543",
     "name":"TAMIR KITI, TORK ANAHTARI 1/2 IN. ICIN",
@@ -77,8 +30,6 @@ var pf=[
     "sinif":"MANUEL EL ALETLERİ VE AKSESUARLARI"
   },
   {
-    "id":5,
-    "id_str":"5",
     "proje":"TAI",
     "no":"9110002121212",
     "name":"MASA ÇALIŞMA (75X250)",
@@ -86,8 +37,6 @@ var pf=[
     "sinif":"MOBİLYA BEYAZ EŞYA VE MUTFAK MALZEMELERİ"
   },
   {
-    "id":6,
-    "id_str":"6",
     "proje":"TAI",
     "no":"93100010469",
     "name":"YAZILIM, MICROSOFT PROJECT",
@@ -95,8 +44,6 @@ var pf=[
     "sinif":"YAZILIM"
   },
   {
-    "id":7,
-    "id_str":"7",
     "proje":"HRJ",
     "no":"5810-3010-0220",
     "name":"MILLI IFF ALICI VERICI UNITESİ",
@@ -104,8 +51,6 @@ var pf=[
     "sinif":"EKİPMAN"
   },
   {
-    "id":8,
-    "id_str":"8",
     "proje":"THB",
     "no":"49380-02",
     "name":"WESCAM_CMX15D",
@@ -113,8 +58,6 @@ var pf=[
     "sinif":"EKİPMAN"
   },
   {
-    "id":9,
-    "id_str":"9",
     "proje":"A4M",
     "no":"727-0790-06",
     "name":"AAR PROBE LIGHT POWER SUPPLY UNIT",
@@ -130,10 +73,10 @@ $(document).ready(function() {
   empty = Handlebars.compile($("#empty-template").html());
 
   engine = new Bloodhound({
-    identify: function(o) { return o.id_str; },
+    identify: function(o) { return o.no; },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('proje','no','name', 'tip', 'sinif'),
-    dupDetector: function(a, b) { return a.id_str === b.id_str; },
+    dupDetector: function(a, b) { return a.no === b.no; },
     local: pf,
     remote: {
       url: 'http://www.google.com',
@@ -141,11 +84,11 @@ $(document).ready(function() {
   });
 
   // ensure default users are read on initialization
-  engine.get('1','3', '4','5','6','7','8','9')
+  engine.get('1', '2', '3', '4')
 
   function engineWithDefaults(q, sync, async) {
     if (q === '') {
-      sync(engine.get('1', '2', '3', '4','5','6','7','8','9'));
+      sync(engine.get('1', '2', '3', '4'));
       async([]);
     }
 
@@ -158,7 +101,6 @@ $(document).ready(function() {
     hint: $('.Typeahead-hint'),
     menu: $('.Typeahead-menu'),
     minLength: 0,
-    maxItem: false,
     classNames: {
       open: 'is-open',
       empty: 'is-empty',
@@ -168,8 +110,7 @@ $(document).ready(function() {
     }
   }, {
     source: engineWithDefaults,
-    displayKey: 'no',
-    limit:10,
+    displayKey: 'screen_name',
     templates: {
       suggestion: template,
       empty: empty
@@ -182,12 +123,6 @@ $(document).ready(function() {
     $('.Typeahead-spinner').hide();
   })
   .on('typeahead:select', function(ev, suggestion) {
-    $("#jsGrid").jsGrid("insertItem",  {
-      "Proje":"TAI",
-      "Malzeme No":suggestion.no,
-      "Miktar":1,
-      "IhtTarihi":new Date()
-    })
     console.log('Selection: ' + suggestion.name);
   });
 
